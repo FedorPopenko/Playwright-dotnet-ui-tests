@@ -1,0 +1,8 @@
+.vs/
+bin/
+obj/
+TestResults/
+playwright-report/
+node_modules/
+*.user
+*.suo
