@@ -1,4 +1,5 @@
 ﻿using Microsoft.Playwright;
+using UiTestsPlaywright.Pages;
 
 namespace UiTestsPlaywright.Tests;
 
@@ -18,6 +19,13 @@ public class BaseTest
         });
 
         Page = await Browser.NewPageAsync();
+    }
+
+    protected async Task LoginAsStandardUserAsync()
+    {
+        var loginPage = new LoginPage(Page);
+        await loginPage.OpenLoginPageAsync();
+        await loginPage.LoginAsync("standard_user", "secret_sauce");
     }
 
     [TearDown]
