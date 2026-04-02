@@ -1,49 +1,64 @@
-﻿using UiTestsPlaywright.Pages;
+﻿using UiTestsPlaywright.Core;
+using UiTestsPlaywright.Pages;
 
-namespace UiTestsPlaywright.Tests;
-
-[TestFixture]
-public class LoginTests : BaseTest
+namespace UiTestsPlaywright.Tests
 {
-    private LoginPage _loginPage;
-    [SetUp]
-    public async Task PageSetup()
+    [TestFixture]
+    public class LoginTests : BaseTest
     {
-        _loginPage = new LoginPage(Page);
-        await _loginPage.OpenLoginPageAsync();
-    }
+        private LoginPage _loginPage;
 
-    [Test]
-    public async Task SuccessfulLoginTest()
-    {
-        await _loginPage.LoginAsync("standard_user", "secret_sauce");
+        [SetUp]
+        public async Task PageSetup()
+        {
+            _loginPage = new LoginPage(Page);
+            await _loginPage.OpenLoginPageAsync();
+        }
 
-        Assert.That(await _loginPage.IsMainPageVisibleAsync(), Is.True);
-    }
+        [Test]
+        public async Task SuccessfulLoginTest()
+        {
+            var username = TestData.StandardUser;
+            var password = TestData.Password;
 
-    [Test]
-    public async Task Login_Should_Show_Error_When_Username_Is_Empty()
-    {
-        await _loginPage.EnterPasswordAsync("secret_sauce");
-        await _loginPage.ClickLoginButtonAsync();
+            await _loginPage.LoginAsync(username, password);
 
-        Assert.That(await _loginPage.IsUsernameErrorVisibleAsync(), Is.True);
-    }
+            var inventoryPage = new InventoryPage(Page);
 
-    [Test]
-    public async Task Login_Should_Show_Error_When_Password_Is_Empty()
-    {
-        await _loginPage.EnterUsernameAsync("standard_user");
-        await _loginPage.ClickLoginButtonAsync();
+            Assert.That(await inventoryPage.IsInventoryPageVisibleAsync(), Is.True);
+        }
 
-        Assert.That(await _loginPage.IsPasswordErrorVisibleAsync(), Is.True);
-    }
+        [Test]
+        public async Task Login_Should_Show_Error_When_Username_Is_Empty()
+        {
+            var password = TestData.Password;
 
-    [Test]
-    public async Task Login_Should_Show_Error_When_Credentials_Are_Invalid()
-    {
-        await _loginPage.LoginAsync("wrong_user", "wrong_password");
+            await _loginPage.EnterPasswordAsync(password);
+            await _loginPage.ClickLoginButtonAsync();
 
-        Assert.That(await _loginPage.IsUsernameAndPasswordErrorVisible(), Is.True);
+            Assert.That(await _loginPage.IsUsernameErrorVisibleAsync(), Is.True);
+        }
+
+        [Test]
+        public async Task Login_Should_Show_Error_When_Password_Is_Empty()
+        {
+            var username = TestData.StandardUser;
+
+            await _loginPage.EnterUsernameAsync(username);
+            await _loginPage.ClickLoginButtonAsync();
+
+            Assert.That(await _loginPage.IsPasswordErrorVisibleAsync(), Is.True);
+        }
+
+        [Test]
+        public async Task Login_Should_Show_Error_When_Credentials_Are_Invalid()
+        {
+            var username = TestData.WrongUser;
+            var password = TestData.WrongPassword;
+
+            await _loginPage.LoginAsync(username, password);
+
+            Assert.That(await _loginPage.IsUsernameAndPasswordErrorVisible(), Is.True);
+        }
     }
 }
