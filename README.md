@@ -66,22 +66,22 @@ The project implements Page Object Model (POM) and covers core user scenarios.
 
 UiTestsPlaywright
  ├── Core 
- │   > ├── AssemblyInfo.cs
- │   > ├── BaseTest.cs
- │   > ├── Product.cs
- │   > └─- TestData.cs
+ │       > ├── AssemblyInfo.cs
+ │       > ├── BaseTest.cs
+ │       > ├── Product.cs
+ │       > └─- TestData.cs
  ├── Pages 
- │   > ├── CheckoutPage
- │     │   >> ├── CheckoutCompletePage.cs
- │     │   >> ├── CheckoutStepOnePage.cs
- │     │   >> └─- CheckoutStepTwoPage.cs
- │   > ├── CartPage.cs
- │   > ├── InventoryPage.cs
- │   > └─- LoginPage.cs
+ │       > ├── CheckoutPage
+ │         │   >> ├── CheckoutCompletePage.cs
+ │         │   >> ├── CheckoutStepOnePage.cs
+ │         │   >> └─- CheckoutStepTwoPage.cs
+ │       > ├── CartPage.cs
+ │       > ├── InventoryPage.cs
+ │       > └─- LoginPage.cs
  └─- Tests 
-     > ├── CartTests.cs
-     > ├── CheckoutTests.cs
-     > ├── E2ETests.cs
-     > ├── InventoryTests.cs
-     > ├── LoginTests.cs
-     > └─- SmokeTests.cs
+         > ├── CartTests.cs
+         > ├── CheckoutTests.cs
+         > ├── E2ETests.cs
+         > ├── InventoryTests.cs
+         > ├── LoginTests.cs
+         > └─- SmokeTests.cs
