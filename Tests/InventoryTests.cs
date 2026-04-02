@@ -1,42 +1,51 @@
-﻿using UiTestsPlaywright.Pages;
+﻿using UiTestsPlaywright.Core;
+using UiTestsPlaywright.Pages;
 
-namespace UiTestsPlaywright.Tests;
-
-[TestFixture]
-public class InventoryTests : BaseTest
+namespace UiTestsPlaywright.Tests
 {
-    private InventoryPage _inventoryPage;
-
-    [SetUp]
-    public async Task SetupPage()
+    [TestFixture]
+    public class InventoryTests : BaseTest
     {
-        _inventoryPage = new InventoryPage(Page);
-        await LoginAsStandardUserAsync();
-    }
+        private InventoryPage _inventoryPage;
 
-    [Test]
-    public async Task Add_Product_To_Cart_Should_Update_Badge()
-    {
-        await _inventoryPage.AddProductToCartAsync("sauce-labs-backpack");
+        [SetUp]
+        public async Task SetupPage()
+        {
+            _inventoryPage = new InventoryPage(Page);
+            await LoginAsStandardUserAsync();
+        }
 
-        Assert.That(await _inventoryPage.GetCartItemCountAsync(), Is.EqualTo(1));
-    }
+        [Test]
+        public async Task Add_Product_To_Cart_Should_Update_Badge()
+        {
+            var product = TestData.Backpack;
 
-    [Test]
-    public async Task Remove_Product_From_Cart_Should_Update_Badge()
-    {
-        await _inventoryPage.AddProductToCartAsync("sauce-labs-backpack");
-        await _inventoryPage.RemoveProductFromInventoryAsync("sauce-labs-backpack");
+            await _inventoryPage.AddProductToCartAsync(product.Slug);
 
-        Assert.That(await _inventoryPage.GetCartItemCountAsync(), Is.EqualTo(0));
-    }
+            Assert.That(await _inventoryPage.GetCartItemCountAsync(), Is.EqualTo(1));
+        }
 
-    [Test]
-    public async Task Add_Multiple_Products_Should_Update_Cart_Count()
-    {
-        await _inventoryPage.AddProductToCartAsync("sauce-labs-backpack");
-        await _inventoryPage.AddProductToCartAsync("sauce-labs-bike-light");
+        [Test]
+        public async Task Remove_Product_From_Cart_Should_Update_Badge()
+        {
+            var product = TestData.Backpack;
 
-        Assert.That(await _inventoryPage.GetCartItemCountAsync(), Is.EqualTo(2));
+            await _inventoryPage.AddProductToCartAsync(product.Slug);
+            await _inventoryPage.RemoveProductFromInventoryAsync(product.Slug);
+
+            Assert.That(await _inventoryPage.GetCartItemCountAsync(), Is.EqualTo(0));
+        }
+
+        [Test]
+        public async Task Add_Multiple_Products_Should_Update_Cart_Count()
+        {
+            var product1 = TestData.Backpack;
+            var product2 = TestData.BikeLight;
+
+            await _inventoryPage.AddProductToCartAsync(product1.Slug);
+            await _inventoryPage.AddProductToCartAsync(product2.Slug);
+
+            Assert.That(await _inventoryPage.GetCartItemCountAsync(), Is.EqualTo(2));
+        }
     }
 }

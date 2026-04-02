@@ -23,12 +23,14 @@ The project implements Page Object Model (POM) and covers core user scenarios.
 **Implemented:**
 - Login page tests
 - Inventory page tests
-- Add/Remove products from cart
-- Cart badge validation
+- Cart page tests
+- Checkout flow
+- E2E test
+- Smoke tests
+- Test data separation
+- Parallel test execution
 
 **In progress:**
-- Checkout flow
-- Test data separation
 - CI integration
 - Screenshots & reporting
 
@@ -36,18 +38,50 @@ The project implements Page Object Model (POM) and covers core user scenarios.
 
 ## 📑 Test Scenarios
 
+### 🔹 Login
 - Login with empty username/password
 - Login with valid credentials
-- Product visibility check
-- Add product to cart
-- Remove product from cart
-- Multiple products cart count validation
+
+### 🔹 Inventory
+- Add product to cart  
+- Remove product  
+- Verify product visibility  
+- Add multiple products  
+
+### 🔹 Cart
+- Verify product in cart  
+- Remove product from cart  
+- Validate cart content  
+
+### 🔹 Checkout
+- Form validation (negative tests)  
+- Successful checkout step transition  
+
+### 🔹 End-to-End
+- Full purchase flow
 
 ---
 
 ## 🗂 Project Structure
 
 UiTestsPlaywright
-- ├── Tests # Test classes
-- ├── Pages # Page Objects
-- ├── Core # BaseTest, helpers, config
+ ├── Core 
+ │   > ├── AssemblyInfo.cs
+ │   > ├── BaseTest.cs
+ │   > ├── Product.cs
+ │   > └─- TestData.cs
+ ├── Pages 
+ │   > ├── CheckoutPage
+ │     │   >> ├── CheckoutCompletePage.cs
+ │     │   >> ├── CheckoutStepOnePage.cs
+ │     │   >> └─- CheckoutStepTwoPage.cs
+ │   > ├── CartPage.cs
+ │   > ├── InventoryPage.cs
+ │   > └─- LoginPage.cs
+ └─- Tests 
+     > ├── CartTests.cs
+     > ├── CheckoutTests.cs
+     > ├── E2ETests.cs
+     > ├── InventoryTests.cs
+     > ├── LoginTests.cs
+     > └─- SmokeTests.cs

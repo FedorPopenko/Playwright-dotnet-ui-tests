@@ -15,6 +15,7 @@ namespace UiTestsPlaywright.Pages
         private ILocator RemoveFromInventoryButton(string productSlug) => _page.Locator($"#remove-{productSlug}");
         private ILocator CartBadge => _page.Locator(".shopping_cart_badge");
         private ILocator CartLink => _page.Locator("[data-test='shopping-cart-link']");
+        private ILocator InventoryProducts => _page.Locator(".title:has-text('Products')");
 
         public async Task AddProductToCartAsync(string productSlug)
         {
@@ -39,6 +40,11 @@ namespace UiTestsPlaywright.Pages
         public async Task GoToCartAsync()
         {
             await CartLink.ClickAsync();
+        }
+
+        public async Task<bool> IsInventoryPageVisibleAsync()
+        {
+            return await InventoryProducts.IsVisibleAsync();
         }
     }
 }

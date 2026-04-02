@@ -1,4 +1,5 @@
 ﻿using Microsoft.Playwright;
+using UiTestsPlaywright.Core;
 
 namespace UiTestsPlaywright.Pages
 {
@@ -17,9 +18,8 @@ namespace UiTestsPlaywright.Pages
         private ILocator ErrorMessageUsername => _page.Locator("[data-test='error']:has-text('Username is required')");
         private ILocator ErrorMessagePassword => _page.Locator("[data-test='error']:has-text('Password is required')");
         private ILocator ErrorMessageUsernameAndPassword => _page.Locator("[data-test='error']:has-text('Username and password do not match')");
-        private ILocator MainPage => _page.Locator(".app_logo:has-text('Swag Labs')");
 
-        private static string LoginPageUrl { get; } = "https://www.saucedemo.com/";
+        private static string LoginPageUrl { get; } = TestData.BaseUrl;
 
         public async Task OpenLoginPageAsync()
         {
@@ -62,11 +62,6 @@ namespace UiTestsPlaywright.Pages
         public async Task<bool> IsUsernameAndPasswordErrorVisible()
         {
             return await ErrorMessageUsernameAndPassword.IsVisibleAsync();
-        }
-
-        public async Task<bool> IsMainPageVisibleAsync()
-        {
-            return await MainPage.IsVisibleAsync();
         }
     }
 }
