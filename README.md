@@ -74,7 +74,7 @@ UiTestsPlaywright/
 ├── Pages/
 │   ├── CheckoutPage/
 │   │   ├── CheckoutStepOnePage.cs
-│   │   ├── CheckoutOverviewPage.cs
+│   │   ├── CheckoutStepTwoPage.cs
 │   │   └── CheckoutCompletePage.cs
 │   ├── CartPage.cs 
 │   ├── InventoryPage.cs
