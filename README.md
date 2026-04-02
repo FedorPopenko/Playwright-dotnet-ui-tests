@@ -65,20 +65,20 @@ The project implements Page Object Model (POM) and covers core user scenarios.
 ## 🗂 Project Structure
 
 UiTestsPlaywright
- ├── Core 
- │       > ├── AssemblyInfo.cs
- │       > ├── BaseTest.cs
- │       > ├── Product.cs
- │       > └─- TestData.cs
- ├── Pages 
- │       > ├── CheckoutPage
- │         │   >> ├── CheckoutCompletePage.cs
- │         │   >> ├── CheckoutStepOnePage.cs
- │         │   >> └─- CheckoutStepTwoPage.cs
- │       > ├── CartPage.cs
- │       > ├── InventoryPage.cs
- │       > └─- LoginPage.cs
- └─- Tests 
+ - Core 
+        > ├── AssemblyInfo.cs
+        > ├── BaseTest.cs
+        > ├── Product.cs
+        > └─- TestData.cs
+ - Pages 
+        > ├── CartPage.cs
+        > ├── InventoryPage.cs
+        > ├── LoginPage.cs   
+        > └─- CheckoutPage
+                   >> ├── CheckoutCompletePage.cs
+                   >> ├── CheckoutStepOnePage.cs
+                   >> └─- CheckoutStepTwoPage.cs
+ - Tests 
          > ├── CartTests.cs
          > ├── CheckoutTests.cs
          > ├── E2ETests.cs
